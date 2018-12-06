@@ -14,6 +14,7 @@ class Question {
     var propositions = [String]()
     var correctAnswer: String?
     var userAnswer: String?
+    var authorImageUrl: String?
     
     init(titleLabel: String) {
         self.questionTitleLabel = titleLabel

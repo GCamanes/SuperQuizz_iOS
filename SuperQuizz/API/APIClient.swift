@@ -63,6 +63,7 @@ class APIClient {
                         q.correctAnswer = q.propositions[3]
                     }
                     q.questionID = objectDictionary[self.KEY_SERVER_ID] as? Int
+                    q.authorImageUrl = objectDictionary[self.KEY_SERVER_AUTHOR_IMG_URL] as? String ?? nil
                     questionsToreturn.append(q)
                 }
                 onSuccess(questionsToreturn)

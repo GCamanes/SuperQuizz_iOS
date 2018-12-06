@@ -10,7 +10,8 @@ import UIKit
 
 class QuestionTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var questionTitltLabel: UILabel!
+    @IBOutlet weak var questionTitleLabel: UILabel!
+    @IBOutlet weak var questionAuthorImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
