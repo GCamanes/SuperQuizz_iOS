@@ -17,31 +17,6 @@ class QuestionsTableViewController: UITableViewController {
         
         self.title = "SuperQuizz"
         
-        let q1 = Question(titleLabel: "Qui est le plus balaise ?")
-        q1.addProposition(proposition: "Superman")
-        q1.addProposition(proposition: "Slipman")
-        q1.addProposition(proposition: "Batman")
-        q1.addProposition(proposition: "Captain Poo")
-        q1.correctAnswer = "Batman"
-        
-        let q2 = Question(titleLabel: "Quelle est la couleur ?")
-        q2.addProposition(proposition: "Rouge")
-        q2.addProposition(proposition: "Bleu")
-        q2.addProposition(proposition: "Vert")
-        q2.addProposition(proposition: "Jaune")
-        q2.correctAnswer = "Bleu"
-        
-        let q3 = Question(titleLabel: "Est-ce que le swift c'est cool ?")
-        q3.addProposition(proposition: "ouais")
-        q3.addProposition(proposition: "bof")
-        q3.addProposition(proposition: "ça claque !")
-        q3.addProposition(proposition: "non")
-        q3.correctAnswer = "ça claque !"
-        
-        listQuestions.append(q1)
-        listQuestions.append(q2)
-        listQuestions.append(q3)
-        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -69,7 +44,7 @@ class QuestionsTableViewController: UITableViewController {
             print(error)
         }
     }
-
+    
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -85,8 +60,8 @@ class QuestionsTableViewController: UITableViewController {
         
         let q = listQuestions[indexPath.row]
         
-        cell.questionTitltLabel.text = "\(String(q.questionID ?? 0)). \(q.questionTitleLabel)"
-        
+        cell.questionTitleLabel.text = "\(q.questionTitleLabel)"
+                
         if let userAnswer = q.userAnswer {
             if (q.checkAnswer(answer: userAnswer)) {
                 cell.backgroundColor = UIColor.green

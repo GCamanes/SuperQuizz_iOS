@@ -19,23 +19,33 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D31-el-bA8">
-                        <rect key="frame" x="16" y="11" width="288" height="22"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D31-el-bA8">
+                        <rect key="frame" x="60" y="11" width="234" height="22"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Y7M-SE-obx">
+                        <rect key="frame" x="0.0" y="-3.5" width="50" height="50.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="50" id="Gjo-9i-swq"/>
+                            <constraint firstAttribute="width" constant="50" id="pGF-zY-1ky"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="bottomMargin" secondItem="D31-el-bA8" secondAttribute="bottom" id="BOm-7O-KZ6"/>
-                    <constraint firstItem="D31-el-bA8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="Dpe-6u-bwS"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="D31-el-bA8" secondAttribute="trailing" id="pYW-p5-sph"/>
-                    <constraint firstItem="D31-el-bA8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="qLn-Cu-zHn"/>
+                    <constraint firstItem="Y7M-SE-obx" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="9MT-Xw-ZFY"/>
+                    <constraint firstItem="D31-el-bA8" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="Dmp-cy-QVK"/>
+                    <constraint firstItem="D31-el-bA8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="OXV-QQ-rzQ"/>
+                    <constraint firstItem="Y7M-SE-obx" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="Z7F-OI-jvP"/>
+                    <constraint firstItem="D31-el-bA8" firstAttribute="leading" secondItem="Y7M-SE-obx" secondAttribute="trailing" constant="10" id="fJC-a3-6eI"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="D31-el-bA8" secondAttribute="trailing" constant="10" id="fVG-j9-0ce"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
-                <outlet property="questionTitltLabel" destination="D31-el-bA8" id="KIy-v2-UkU"/>
+                <outlet property="questionAuthorImage" destination="Y7M-SE-obx" id="g4u-oS-weQ"/>
+                <outlet property="questionTitleLabel" destination="D31-el-bA8" id="KIy-v2-UkU"/>
             </connections>
             <point key="canvasLocation" x="121.59999999999999" y="129.53523238380811"/>
         </tableViewCell>
