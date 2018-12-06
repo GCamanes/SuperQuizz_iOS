@@ -50,9 +50,27 @@ class QuestionsTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName:"QuestionTableViewCell", bundle: nil), forCellReuseIdentifier: "QuestionTableViewCell")
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+       refreshViewFromServer()
+    }
+    
+    //Mark: Refresh
+    func refreshViewFromServer(){
+        APIClient.instance.getAllQuestionsFromServer(
+            onSuccess: { (questions) in
+                //self.listQuestions = questions
+                self.listQuestions = questions
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+        }) { (error) in
+            print(error)
+        }
+    }
 
     // MARK: - Table view data source
-
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
@@ -60,13 +78,10 @@ class QuestionsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.listQuestions.count
     }
-
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionTableViewCell", for: indexPath)
             as! QuestionTableViewCell
-        
-        listQuestions[indexPath.row].questionID = indexPath.row
         
         let q = listQuestions[indexPath.row]
         
@@ -78,11 +93,12 @@ class QuestionsTableViewController: UITableViewController {
             } else {
                 cell.backgroundColor = UIColor.red
             }
+        } else {
+             cell.backgroundColor = UIColor.white
         }
 
         return cell
     }
-    
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let controller = UIStoryboard(name: "Main", bundle: nil)
@@ -94,8 +110,6 @@ class QuestionsTableViewController: UITableViewController {
         controller.question = listQuestions[indexPath.row]
         
         controller.setOnReponseAnswered { (questionAnswered, result) in
-            // TODO: metre à jour la liste de question, ou faire un appel réseau, ou mettre à jour la base
-            
             self.navigationController?.popViewController(animated: true)
             
             if result {
@@ -118,18 +132,39 @@ class QuestionsTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (action, indexpath) in
+        let editAction = UITableViewRowAction(style: .normal, title: "Edition") { (action, indexpath) in
             //TODO: edit question
             let controller = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "CreateOrEditQuestionViewController") as! CreateOrEditQuestionViewController
             controller.delegate = self
             controller.questionToEdit = self.listQuestions[indexPath.row]
             self.present(controller, animated: true, completion: nil)
-            
         }
         
-        let deleteAction = UITableViewRowAction(style: .destructive, title: "delete") { (action, indexpath) in
-            self.listQuestions.remove(at: indexPath.row)
-            self.tableView.reloadData()
+        //Creer l'action de suppresion de la liste
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Supression") { (action, indexpath) in
+            
+            let questionDeleteAlert = UIAlertController(title: "Suppression de question", message: "Que voulez-vous faire ?", preferredStyle: .alert)
+            
+            let actionDelete = UIAlertAction(title: "Supprimer", style: .destructive) { (action: UIAlertAction) in
+                let question = self.listQuestions[indexPath.row]
+                
+                APIClient.instance.deleteQuestionFromServer(id: question.questionID! ,onSuccess: {
+                    DispatchQueue.main.async {
+                        self.listQuestions.remove(at: indexPath.row)
+                        self.tableView.beginUpdates()
+                        self.tableView.deleteRows(at: [indexPath], with: .fade)
+                        self.tableView.endUpdates()
+                    }
+                }, onError: { (error) in
+                    print(error)
+                })
+            }
+            let actionCancel = UIAlertAction(title: "Annuler", style: .default)
+            
+            questionDeleteAlert.addAction(actionCancel)
+            questionDeleteAlert.addAction(actionDelete)
+            self.present(questionDeleteAlert, animated: true, completion: nil)
+        
         }
         return [editAction,deleteAction]
     }
@@ -137,12 +172,21 @@ class QuestionsTableViewController: UITableViewController {
 
 extension QuestionsTableViewController : CreateOrEditQuestionDelegate {
     func userDidEditQuestion(q: Question, from vc: CreateOrEditQuestionViewController) {
+        APIClient.instance.updateQuestionFromServer(question: q, onSuccess: {
+            
+        }, onError: { (error) in
+            print(error)
+        })
         self.presentedViewController?.dismiss(animated: true, completion: nil)
         self.tableView.reloadData()
     }
     
     func userDidCreateQuestion(q: Question, from vc: CreateOrEditQuestionViewController) {
-        self.listQuestions.append(q)
+        APIClient.instance.addQuestionFromServer(question: q, onSuccess: {
+            
+        }, onError: { (error) in
+            print(error)
+        })
         self.presentedViewController?.dismiss(animated: true, completion: nil)
         self.tableView.reloadData()
     }

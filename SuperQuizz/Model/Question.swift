@@ -30,4 +30,16 @@ class Question {
             return false
         }
     }
+    
+    func getCorrectAnswerIndex() -> Int {
+        if checkAnswer(answer: propositions[0]) {
+            return 1
+        } else if checkAnswer(answer: propositions[1]) {
+            return 2
+        } else if checkAnswer(answer: propositions[2]) {
+            return 3
+        } else {
+            return 4
+        }
+    }
 }

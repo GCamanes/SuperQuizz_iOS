@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5C36CB7021B9375B000D4853 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C36CB6F21B9375B000D4853 /* APIClient.swift */; };
 		5C9B02C821B6B5C400297FC0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B02C721B6B5C400297FC0 /* AppDelegate.swift */; };
 		5C9B02CA21B6B5C400297FC0 /* AnswerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C9B02C921B6B5C400297FC0 /* AnswerViewController.swift */; };
 		5C9B02CD21B6B5C400297FC0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5C9B02CB21B6B5C400297FC0 /* Main.storyboard */; };
@@ -39,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5C36CB6F21B9375B000D4853 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		5C9B02C421B6B5C400297FC0 /* SuperQuizz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SuperQuizz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C9B02C721B6B5C400297FC0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5C9B02C921B6B5C400297FC0 /* AnswerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +86,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5C36CB6D21B9373C000D4853 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
+		5C36CB6E21B93744000D4853 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				5C36CB6F21B9375B000D4853 /* APIClient.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
 		5C9B02BB21B6B5C400297FC0 = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				5C9B02C721B6B5C400297FC0 /* AppDelegate.swift */,
+				5C36CB6E21B93744000D4853 /* API */,
+				5C36CB6D21B9373C000D4853 /* New Group */,
 				5CD1DF6A21B7CFC400B94B9E /* Model */,
 				5CD1DF6621B7CF4D00B94B9E /* UI */,
 				5C9B02CE21B6B5C600297FC0 /* Assets.xcassets */,
@@ -313,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5C9B02FC21B6C4CC00297FC0 /* Question.swift in Sources */,
+				5C36CB7021B9375B000D4853 /* APIClient.swift in Sources */,
 				5C9B02CA21B6B5C400297FC0 /* AnswerViewController.swift in Sources */,
 				5C9B02F921B6C0F200297FC0 /* QuestionTableViewCell.swift in Sources */,
 				5C9B02F621B6B76D00297FC0 /* QuestionsTableViewController.swift in Sources */,
