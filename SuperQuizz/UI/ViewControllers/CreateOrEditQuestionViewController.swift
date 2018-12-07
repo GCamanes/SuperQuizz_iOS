@@ -17,7 +17,7 @@ class CreateOrEditQuestionViewController: UIViewController {
     
     var questionToEdit: Question?
     weak var delegate : CreateOrEditQuestionDelegate?
-    
+        
     @IBOutlet weak var questionLabelTextField: UITextField!
     @IBOutlet weak var answer1TextField: UITextField!
     @IBOutlet weak var answer2TextField: UITextField!

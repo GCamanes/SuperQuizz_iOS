@@ -12,10 +12,16 @@ class QuestionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var questionTitleLabel: UILabel!
     @IBOutlet weak var questionAuthorImage: UIImageView!
+    @IBOutlet weak var questionAnswerView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        questionAuthorImage.layer.cornerRadius = questionAuthorImage.frame.height * 0.1
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -23,5 +29,4 @@ class QuestionTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    
 }

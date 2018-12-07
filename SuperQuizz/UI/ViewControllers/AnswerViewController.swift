@@ -53,13 +53,11 @@ class AnswerViewController: UIViewController {
     }
 
     func userDidChooseAnswer(isCorrectAnswer: Bool) {
-        // do animation according to user answer
         self.work!.cancel()
         onQuestionAnswered?(question, isCorrectAnswer)
     }
     
     @IBAction func userDidChooseAnswer(_ sender: UIButton) {
-        print(question.checkAnswer(answer: sender.titleLabel?.text ?? "......."))
         userDidChooseAnswer(isCorrectAnswer: question.checkAnswer(answer: sender.titleLabel?.text ?? "......."))
     }
 }

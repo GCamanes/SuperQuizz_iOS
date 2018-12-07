@@ -29,20 +29,16 @@ class APIClient {
     @discardableResult
     func getAllQuestionsFromServer(onSuccess:@escaping ([Question])->(), onError:@escaping (Error)->())-> URLSessionTask {
         
-        //préparation de la requete
         var request = URLRequest(url: URL(string: "\(urlServer)/questions")! )
         request.httpMethod = "GET"
         
-        // preparation de la tache de telechargezmebnt des données
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            // si j'ai de la donnée
             if let data = data {
                 
-                // Je la transforme en Array
                 let dataArray = try! JSONSerialization.jsonObject(with: data, options: []) as! [Any]
                 var questionsToreturn = [Question]()
-                // pour chaque objet d'ans l'array
+
                 for object in dataArray {
                     
                     let objectDictionary = object as! [String:Any]
@@ -72,10 +68,8 @@ class APIClient {
                 onError(error!)
             }
         }
-        // lance la tache
-        task.resume()
         
-        // revoie la tache pour pouvoir l'annuler
+        task.resume()
         return task
     }
     
@@ -83,24 +77,19 @@ class APIClient {
     @discardableResult
     func deleteQuestionFromServer(id: Int, onSuccess:@escaping ()->(), onError:@escaping (Error)->())-> URLSessionTask {
         
-        //préparation de la requete
         var request = URLRequest(url: URL(string: "\(urlServer)/questions/\(String(id))")! )
         request.httpMethod = "DELETE"
         
-        // preparation de la tache de telechargezmebnt des données
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            // si j'ai de la donnée
             if data != nil {
                 onSuccess()
             } else  {
                 onError(error!)
             }
         }
-        // lance la tache
+
         task.resume()
-        
-        // revoie la tache pour pouvoir l'annuler
         return task
     }
     
@@ -108,7 +97,6 @@ class APIClient {
     @discardableResult
     func addQuestionFromServer(question: Question, onSuccess:@escaping ()->(), onError:@escaping (Error)->())-> URLSessionTask {
         
-        //préparation de la requete
         var request = URLRequest(url: URL(string: "\(urlServer)/questions")! )
         request.httpMethod = "POST"
         
@@ -124,20 +112,16 @@ class APIClient {
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // preparation de la tache de telechargezmebnt des données
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            // si j'ai de la donnée
             if data != nil {
                 onSuccess()
             } else  {
                 onError(error!)
             }
         }
-        // lance la tache
+
         task.resume()
-        
-        // revoie la tache pour pouvoir l'annuler
         return task
     }
     
@@ -145,7 +129,6 @@ class APIClient {
     @discardableResult
     func updateQuestionFromServer(question: Question, onSuccess:@escaping ()->(), onError:@escaping (Error)->())-> URLSessionTask {
         
-        //préparation de la requete
         var request = URLRequest(url: URL(string: "\(urlServer)/questions/\(String(question.questionID!))")! )
         request.httpMethod = "PUT"
         
@@ -161,20 +144,16 @@ class APIClient {
         request.httpBody = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // preparation de la tache de telechargezmebnt des données
         let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
             
-            // si j'ai de la donnée
             if data != nil {
                 onSuccess()
             } else  {
                 onError(error!)
             }
         }
-        // lance la tache
+
         task.resume()
-        
-        // revoie la tache pour pouvoir l'annuler
         return task
     }
 }
